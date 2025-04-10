@@ -322,7 +322,15 @@ public class AsyncFileHandler extends StreamHandler {
     @Override
     public boolean isLoggable(LogRecord record) {
         // add feature switch here
-        return fFileHandler.isLoggable(record) && (record instanceof TraceEventLogRecord);
+        boolean loggable = fFileHandler.isLoggable(record) && (record instanceof TraceEventLogRecord);
+        if (!loggable) {
+//            System.out.println("--- Not Loggable - logger: " + record.getLoggerName() + ", message: " + record.getMessage() + ", level: " + record.getLevel().getLocalizedName() + " / " + record.getLevel().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+        } else {
+//            System.out.println("+++ Loggable - logger: " + record.getLoggerName() + ", message: " + record.getMessage()  + ", level: " + record.getLevel().getLocalizedName() + " / " + record.getLevel().getName());  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+        }
+        return loggable;
+        // level
+//        return fFileHandler.isLoggable(record) && (record instanceof TraceEventLogRecord);
     }
 
     @Override
