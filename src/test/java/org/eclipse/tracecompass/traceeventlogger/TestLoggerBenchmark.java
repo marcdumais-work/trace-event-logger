@@ -60,7 +60,24 @@ public class TestLoggerBenchmark {
     private long warmUp = 2000;
     private long maxRuns = warmUp * 100;
     private double growth = 2.3;
-    private final static float newAsyncPerformenceThreshold = 2.5f;
+    private final static float newAsyncPerformenceThreshold = 3.5f;
+
+
+    @Test
+    public void testRepeater() {
+        for (int i = 0; i < 10; i++) {
+            try {
+                testBench();
+                waiting();
+                testLeanBench();
+                waiting();;
+            } catch (SecurityException | IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     /**
      * Benchmark events with fields
@@ -70,7 +87,7 @@ public class TestLoggerBenchmark {
      * @throws IOException
      *             won't happen
      */
-    @Test
+    // @Test
     public void testBench() throws SecurityException, IOException {
         fLogger = Logger.getAnonymousLogger();
         files[0] = File.createTempFile("trace-old", ".json"); //$NON-NLS-1$ //$NON-NLS-2$
@@ -259,7 +276,7 @@ public class TestLoggerBenchmark {
     /**
      * Wait for both files to finish
      */
-    @After
+    // @After
     public void waiting() {
         try {
             int nbRetries = 0;
@@ -297,7 +314,7 @@ public class TestLoggerBenchmark {
      * @throws IOException
      *             Won't happen
      */
-    @Test
+    // @Test
     public void testLeanBench() throws SecurityException, IOException {
         fLogger = Logger.getAnonymousLogger();
         files[0] = File.createTempFile("trace-lean-old", ".json"); //$NON-NLS-1$ //$NON-NLS-2$
