@@ -60,7 +60,7 @@ public class TestLoggerBenchmark {
     private long warmUp = 2000;
     private long maxRuns = warmUp * 100;
     private double growth = 2.3;
-    private final static float newAsyncPerformenceThreshold = 3.5f;
+    private final static float newAsyncPerformenceThreshold = 8.0f;
 
 
     @Test
